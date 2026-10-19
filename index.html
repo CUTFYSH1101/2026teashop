@@ -26,10 +26,10 @@
       <span class="menu-caption">春水堂菜單 · 點選下方飲品開始訂購</span>
     </section>
 
-    <section class="order-row" aria-label="飲料訂購與價格">
+    <section class="order-row" aria-label="餐點訂購與價格">
       <form id="order-form" class="order-form">
         <div class="section-heading">
-          <div><span class="eyebrow">CLASS ORDER</span><h1>今天想喝什麼？</h1></div>
+          <div><span class="eyebrow">CLASS ORDER</span><h1>今天想吃什麼？</h1></div>
           <span class="required-note">* 必填</span>
         </div>
 
@@ -40,7 +40,7 @@
 
         <div class="field-grid">
           <label class="field">
-            <span>飲品 <b>*</b></span>
+            <span>餐點／飲品 <b>*</b></span>
             <select id="drink" name="drink" required></select>
           </label>
           <label class="field">
@@ -49,12 +49,17 @@
           </label>
         </div>
 
-        <fieldset class="choice-field">
+        <label id="bundle-drink-field" class="field name-field" hidden>
+          <span>套餐附飲</span>
+          <select id="bundle-drink" name="bundleDrink"></select>
+        </label>
+
+        <fieldset id="beverage-temperature" class="choice-field">
           <legend>冷熱</legend>
           <div id="temperature-options" class="segmented"></div>
         </fieldset>
 
-        <div class="field-grid">
+        <div id="beverage-adjustments" class="field-grid">
           <label class="field">
             <span>甜度</span>
             <select name="sugar">
@@ -73,7 +78,7 @@
           </label>
         </div>
 
-        <fieldset class="choice-field addons-field">
+        <fieldset id="beverage-addons" class="choice-field addons-field">
           <legend>加料 <span>可複選</span></legend>
           <div class="addon-list">
             <label><input type="checkbox" name="addon" value="珍珠" data-price="10"><span>珍珠</span><small>+$10</small></label>
@@ -91,7 +96,7 @@
         <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
       </form>
 
-      <aside class="price-panel" aria-label="訂單金額">
+      <aside class="price-panel" aria-label="餐點金額">
         <div class="price-topline"><span>ORDER TOTAL</span><span class="price-dot" aria-hidden="true"></span></div>
         <p class="price-label">本次金額</p>
         <p class="price-amount"><span>$</span><strong id="total-price">0</strong></p>

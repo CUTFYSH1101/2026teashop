@@ -17,7 +17,7 @@ function renderOrders(orders) {
   if (!orders.length) {
     const row = document.createElement('tr');
     const cell = document.createElement('td');
-    cell.colSpan = 6;
+    cell.colSpan = 8;
     cell.className = 'empty-state';
     cell.textContent = '目前還沒有訂單';
     row.append(cell);
@@ -27,7 +27,9 @@ function renderOrders(orders) {
   ordersBody.replaceChildren(...orders.map(order => {
     const row = document.createElement('tr');
     addCell(row, order.name);
-    addCell(row, order.drink);
+    addCell(row, order.category);
+    addCell(row, order.item);
+    addCell(row, order.bundleDrink);
     addCell(row, `${order.temperature}・${order.size}`);
     addCell(row, `${order.sugar}／${order.ice}`);
     addCell(row, [order.addons !== '無' ? order.addons : '', order.note].filter(Boolean).join(' · '));

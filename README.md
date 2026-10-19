@@ -1,6 +1,6 @@
 # 春水堂班級飲料訂購
 
-春水堂飲品點餐與班級訂單查詢，使用 GitHub Pages 發布，Google Apps Script 寫入 Google 試算表。
+春水堂完整菜單點餐（飲品、茶點、主食、套餐與湯品）及班級訂單查詢，使用 GitHub Pages 發布，Google Apps Script 寫入 Google 試算表。
 
 ## 網頁
 
