@@ -30,8 +30,8 @@ function renderOrders(orders) {
     addCell(row, order.category);
     addCell(row, order.item);
     addCell(row, order.bundleDrink);
-    addCell(row, `${order.temperature}・${order.size}`);
-    addCell(row, `${order.sugar}／${order.ice}`);
+    addCell(row, [order.temperature, order.size].filter(Boolean).join('・') || '單點');
+    addCell(row, [order.sugar, order.ice].filter(Boolean).join('／'));
     addCell(row, [order.addons !== '無' ? order.addons : '', order.note].filter(Boolean).join(' · '));
     addCell(row, `$${Number(order.price).toLocaleString('zh-TW')}`, 'amount-cell');
     return row;
