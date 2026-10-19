@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7f1834">
+  <title>春水堂班級飲料訂購</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="春水堂點餐首頁">
+      <span class="brand-mark" aria-hidden="true">春</span>
+      <span><strong>春水堂</strong><small>班級飲料訂購</small></span>
+    </a>
+    <nav aria-label="主要導覽">
+      <a class="nav-link is-current" href="index.html">點飲料</a>
+      <a class="nav-link" href="orders.html">目前訂單</a>
+    </nav>
+  </header>
+
+  <main class="order-page">
+    <section class="menu-row" aria-label="春水堂菜單">
+      <img class="menu-image" src="menu.jpg" alt="春水堂完整菜單，包含飲品與餐點價格">
+      <span class="menu-caption">春水堂菜單 · 點選下方飲品開始訂購</span>
+    </section>
+
+    <section class="order-row" aria-label="飲料訂購與價格">
+      <form id="order-form" class="order-form">
+        <div class="section-heading">
+          <div><span class="eyebrow">CLASS ORDER</span><h1>今天想喝什麼？</h1></div>
+          <span class="required-note">* 必填</span>
+        </div>
+
+        <label class="field name-field">
+          <span>訂購姓名 <b>*</b></span>
+          <input name="name" autocomplete="name" maxlength="40" placeholder="輸入姓名，方便認領" required>
+        </label>
+
+        <div class="field-grid">
+          <label class="field">
+            <span>飲品 <b>*</b></span>
+            <select id="drink" name="drink" required></select>
+          </label>
+          <label class="field">
+            <span>容量 <b>*</b></span>
+            <select id="size" name="size" required></select>
+          </label>
+        </div>
+
+        <fieldset class="choice-field">
+          <legend>冷熱</legend>
+          <div id="temperature-options" class="segmented"></div>
+        </fieldset>
+
+        <div class="field-grid">
+          <label class="field">
+            <span>甜度</span>
+            <select name="sugar">
+              <option value="全糖">全糖</option><option value="少糖">少糖</option>
+              <option value="半糖">半糖</option><option value="微糖">微糖</option>
+              <option value="一分糖">一分糖</option><option value="無糖">無糖</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>冰量</span>
+            <select name="ice">
+              <option value="正常冰">正常冰</option><option value="少冰">少冰</option>
+              <option value="微冰">微冰</option><option value="去冰">去冰</option>
+              <option value="常溫">常溫</option>
+            </select>
+          </label>
+        </div>
+
+        <fieldset class="choice-field addons-field">
+          <legend>加料 <span>可複選</span></legend>
+          <div class="addon-list">
+            <label><input type="checkbox" name="addon" value="珍珠" data-price="10"><span>珍珠</span><small>+$10</small></label>
+            <label><input type="checkbox" name="addon" value="椰果" data-price="10"><span>椰果</span><small>+$10</small></label>
+            <label><input type="checkbox" name="addon" value="檸檬原汁" data-price="10"><span>檸檬原汁</span><small>+$10</small></label>
+            <label><input type="checkbox" name="addon" value="蘆薈" data-price="15"><span>蘆薈</span><small>+$15</small></label>
+          </div>
+        </fieldset>
+
+        <label class="field note-field">
+          <span>備註</span>
+          <input name="note" maxlength="100" placeholder="例如：珍珠另外放">
+        </label>
+        <button class="submit-button" type="submit"><span>送出訂單</span><span aria-hidden="true">→</span></button>
+        <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+      </form>
+
+      <aside class="price-panel" aria-label="訂單金額">
+        <div class="price-topline"><span>ORDER TOTAL</span><span class="price-dot" aria-hidden="true"></span></div>
+        <p class="price-label">本次金額</p>
+        <p class="price-amount"><span>$</span><strong id="total-price">0</strong></p>
+        <div class="price-rule"></div>
+        <dl class="price-details">
+          <div><dt id="price-description">請先選擇飲品</dt><dd id="base-price">$0</dd></div>
+          <div><dt>加料</dt><dd id="addon-price">$0</dd></div>
+        </dl>
+        <div class="price-stamp" aria-hidden="true">現點<br>現做</div>
+        <p class="price-footnote">送出時會一併記錄此金額</p>
+      </aside>
+    </section>
+  </main>
+  <footer class="site-footer"><span>春水堂 · 班級飲料訂購</span><span>請確認姓名與品項後送出</span></footer>
+</body>
+</html>

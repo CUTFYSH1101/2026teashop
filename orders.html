@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7f1834">
+  <title>目前訂單｜春水堂班級飲料訂購</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="orders.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="春水堂點餐首頁">
+      <span class="brand-mark" aria-hidden="true">春</span>
+      <span><strong>春水堂</strong><small>班級飲料訂購</small></span>
+    </a>
+    <nav aria-label="主要導覽">
+      <a class="nav-link" href="index.html">點飲料</a>
+      <a class="nav-link is-current" href="orders.html">目前訂單</a>
+    </nav>
+  </header>
+  <main class="status-page">
+    <div class="status-heading">
+      <div><span class="eyebrow">LIVE ORDER LIST</span><h1>目前訂單</h1><p>一起確認大家點了什麼。</p></div>
+      <button id="refresh-orders" class="refresh-button" type="button" aria-label="重新整理訂單"><span aria-hidden="true">↻</span>重新整理</button>
+    </div>
+    <div class="status-summary"><span><i class="live-indicator"></i>訂單總數</span><strong id="order-count">—</strong></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>姓名</th><th>飲品</th><th>規格</th><th>甜度／冰量</th><th>加料與備註</th><th class="amount-cell">金額</th></tr></thead>
+        <tbody id="orders-body"><tr><td class="empty-state" colspan="6">正在載入訂單…</td></tr></tbody>
+      </table>
+    </div>
+    <p id="orders-message" class="orders-message" role="status" aria-live="polite"></p>
+  </main>
+  <footer class="site-footer"><span>春水堂 · 班級飲料訂購</span><a href="index.html">返回點餐</a></footer>
+</body>
+</html>
