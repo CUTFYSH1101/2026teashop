@@ -1,4 +1,4 @@
-const APP_SCRIPT_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL';
+const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwtKqGNeSg6frF1LHP_PRrgqH21YmA0w87YrbkxbmwNnMMB-QC5c6i3E1j3YnyD3stuIg/exec';
 
 const drinks = [
   { category: '珍珠奶茶', name: '珍珠奶茶', cold: [90, 170], hot: [105, 200] },
