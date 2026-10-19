@@ -1,13 +1,12 @@
 const SPREADSHEET_TITLE = '2026手搖飲點餐記錄';
+const BOUND_SPREADSHEET_ID = '1bfnlHnG7OVi0Sx0XgTS3rRzfRg5lOfIG9xLBTgO61is';
 const SHEET_NAME = '訂單';
 const HEADERS = ['送出時間', '姓名', '飲品分類', '飲品', '冷熱', '容量', '甜度', '冰量', '加料', '備註', '金額（元）'];
 
 function doGet(event) {
   const action = event?.parameter?.action || 'orders';
   if (action === 'setup') {
-    const spreadsheetId = PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID');
-    if (!spreadsheetId) return respond_({ ok: false, error: '請先在 Apps Script 編輯器執行 setup()。' }, event);
-    const spreadsheet = SpreadsheetApp.openById(spreadsheetId);
+    const spreadsheet = getOrCreateSpreadsheet_();
     return respond_({ ok: true, title: spreadsheet.getName(), url: spreadsheet.getUrl() }, event);
   }
   if (action === 'orders') {
@@ -60,8 +59,10 @@ function getOrCreateSpreadsheet_() {
   if (spreadsheetId) {
     spreadsheet = SpreadsheetApp.openById(spreadsheetId);
   } else {
-    spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    if (!spreadsheet) throw new Error('請先在綁定試算表的 Apps Script 編輯器執行 setup()。');
+    spreadsheet = BOUND_SPREADSHEET_ID
+      ? SpreadsheetApp.openById(BOUND_SPREADSHEET_ID)
+      : SpreadsheetApp.getActiveSpreadsheet();
+    if (!spreadsheet) throw new Error('找不到綁定的 Google 試算表。');
     spreadsheet.setName(SPREADSHEET_TITLE);
     properties.setProperty('SPREADSHEET_ID', spreadsheet.getId());
   }
@@ -77,11 +78,7 @@ function getOrCreateSpreadsheet_() {
 }
 
 function setup() {
-  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  if (!spreadsheet) throw new Error('setup() 必須從綁定的 Google 試算表執行。');
-  spreadsheet.setName(SPREADSHEET_TITLE);
-  PropertiesService.getScriptProperties().setProperty('SPREADSHEET_ID', spreadsheet.getId());
-  getOrCreateSpreadsheet_();
+  const spreadsheet = getOrCreateSpreadsheet_();
   return spreadsheet.getUrl();
 }
 
