@@ -5,7 +5,9 @@ const HEADERS = ['送出時間', '姓名', '飲品分類', '飲品', '冷熱', '
 function doGet(event) {
   const action = event?.parameter?.action || 'orders';
   if (action === 'setup') {
-    const spreadsheet = getOrCreateSpreadsheet_();
+    const spreadsheetId = PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID');
+    if (!spreadsheetId) return respond_({ ok: false, error: '請先在 Apps Script 編輯器執行 setup()。' }, event);
+    const spreadsheet = SpreadsheetApp.openById(spreadsheetId);
     return respond_({ ok: true, title: spreadsheet.getName(), url: spreadsheet.getUrl() }, event);
   }
   if (action === 'orders') {
@@ -58,7 +60,8 @@ function getOrCreateSpreadsheet_() {
   if (spreadsheetId) {
     spreadsheet = SpreadsheetApp.openById(spreadsheetId);
   } else {
-    spreadsheet = SpreadsheetApp.getActiveSpreadsheet() || SpreadsheetApp.create(SPREADSHEET_TITLE);
+    spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    if (!spreadsheet) throw new Error('請先在綁定試算表的 Apps Script 編輯器執行 setup()。');
     spreadsheet.setName(SPREADSHEET_TITLE);
     properties.setProperty('SPREADSHEET_ID', spreadsheet.getId());
   }
@@ -71,6 +74,15 @@ function getOrCreateSpreadsheet_() {
     sheet.autoResizeColumns(1, HEADERS.length);
   }
   return spreadsheet;
+}
+
+function setup() {
+  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  if (!spreadsheet) throw new Error('setup() 必須從綁定的 Google 試算表執行。');
+  spreadsheet.setName(SPREADSHEET_TITLE);
+  PropertiesService.getScriptProperties().setProperty('SPREADSHEET_ID', spreadsheet.getId());
+  getOrCreateSpreadsheet_();
+  return spreadsheet.getUrl();
 }
 
 function respond_(data, event) {
